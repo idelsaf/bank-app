@@ -17,35 +17,37 @@ public class LoginGui extends BaseFrame{
         add(bankingAppLabel);
 
         JLabel usernameLabel = new JLabel("Username:");
-        usernameLabel.setBounds(100, 140, 150, 24);
-        usernameLabel.setFont(new Font("Benzin-Medium", Font.PLAIN,20));
+        usernameLabel.setBounds(120, 140, 150, 24);
+        usernameLabel.setFont(new Font("Montserrat", Font.PLAIN,20));
         add(usernameLabel);
 
         JTextField usernameField = new JTextField();
-        usernameField.setBounds(100 + 150, 135, getWidth() - 500, 30);
-        usernameField.setFont(new Font("Dialog", Font.PLAIN, 20));
+        usernameField.setBounds(100 + 150, 140, getWidth() - 500, 30);
+        usernameField.setFont(new Font("Montserrat", Font.PLAIN, 20));
         add(usernameField);
 
         JLabel passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(100, 200, 150, 24);
-        passwordLabel.setFont(new Font("Benzin-Medium", Font.PLAIN,20));
+        passwordLabel.setBounds(120, 200, 150, 24);
+        passwordLabel.setFont(new Font("Montserrat", Font.PLAIN,20));
         add(passwordLabel);
 
         JPasswordField passwordField = new JPasswordField();
-        passwordField.setBounds(100 + 150, 195, getWidth() - 500, 30);
-        passwordField.setFont(new Font("Dialog", Font.PLAIN, 20));
+        passwordField.setBounds(100 + 150, 200, getWidth() - 500, 30);
+        passwordField.setFont(new Font("Montserrat", Font.PLAIN, 20));
         add(passwordField);
 
         JButton loginButton = new JButton("Login");
-        loginButton.setBounds(100 + 150 + 75, 260, getWidth() - 650, 30);
-        loginButton.setFont(new Font("Benzin-Medium", Font.BOLD, 15));
-        loginButton.setBackground(Color.LIGHT_GRAY);
+        loginButton.setBounds(100 + 150 + 75, 270, getWidth() - 650, 30);
+        loginButton.setFont(new Font("Montserrat", Font.BOLD, 20));
+        loginButton.setBackground(Color.GRAY);
+        loginButton.setForeground(Color.WHITE);
         add(loginButton);
 
         JButton registerButton = new JButton("Register");
-        registerButton.setBounds(100 + 150 + 75, 310, getWidth() - 650, 30);
-        registerButton.setFont(new Font("Benzin-Medium", Font.BOLD, 15));
+        registerButton.setBounds(100 + 150 + 75, 320, getWidth() - 650, 30);
+        registerButton.setFont(new Font("Montserrat", Font.BOLD, 20));
         registerButton.setBackground(Color.LIGHT_GRAY);
+        registerButton.setForeground(Color.WHITE);
         add(registerButton);
     }
 }
