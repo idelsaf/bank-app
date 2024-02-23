@@ -6,7 +6,6 @@ import java.awt.*;
 public class RegisterGui extends BaseFrame {
     public RegisterGui() {
         super("Bank App Register");
-
     }
 
     @Override

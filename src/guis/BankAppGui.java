@@ -73,5 +73,13 @@ public class BankAppGui extends BaseFrame {
         cardDetailsButton.setHorizontalAlignment(SwingConstants.CENTER);
         cardDetailsButton.setBackground(Color.LIGHT_GRAY);
         add(cardDetailsButton);
+
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.setBounds(700, 30, getWidth() - 730, 30);
+        logoutButton.setFont(new Font("Montserrat", Font.BOLD, 20));
+        logoutButton.setHorizontalAlignment(SwingConstants.CENTER);
+        logoutButton.setBackground(new Color(255, 89, 64));
+        logoutButton.setForeground(Color.WHITE);
+        add(logoutButton);
     }
 }

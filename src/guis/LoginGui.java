@@ -1,5 +1,8 @@
 package guis;
 
+import db_objs.MyJDBC;
+import db_objs.User;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -41,6 +44,21 @@ public class LoginGui extends BaseFrame{
         loginButton.setFont(new Font("Montserrat", Font.BOLD, 20));
         loginButton.setBackground(Color.GRAY);
         loginButton.setForeground(Color.WHITE);
+        loginButton.addActionListener(e -> {
+            String username = usernameField.getText();
+            String password = String.valueOf(passwordField.getPassword());
+            User user = MyJDBC.validateLogin(username, password);
+
+            if (user != null) {
+                LoginGui.this.dispose();
+                BankAppGui bankAppGui = new BankAppGui(user);
+                bankAppGui.setVisible(true);
+
+                JOptionPane.showMessageDialog(bankAppGui, "Login successfully!");
+            } else {
+                JOptionPane.showMessageDialog(LoginGui.this, "Login failed...");
+            }
+        });
         add(loginButton);
 
         JButton registerButton = new JButton("Register");
@@ -48,6 +66,11 @@ public class LoginGui extends BaseFrame{
         registerButton.setFont(new Font("Montserrat", Font.BOLD, 20));
         registerButton.setBackground(Color.LIGHT_GRAY);
         registerButton.setForeground(Color.WHITE);
+        registerButton.addActionListener(e -> {
+            LoginGui.this.dispose();
+            RegisterGui registerGui = new RegisterGui();
+            registerGui.setVisible(true);
+        });
         add(registerButton);
     }
 }

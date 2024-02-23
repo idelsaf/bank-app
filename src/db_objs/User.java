@@ -10,15 +10,15 @@ public class User {
     private final String phoneNumber, cardNumber, pinCode;
     private BigDecimal currentBalance;
 
-    public User(int id, String username, String password, String fullName, String phoneNumber) {
+    public User(int id, String username, String password, String fullName, String phoneNumber, BigDecimal currentBalance, String cardNumber, String pinCode) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
-        currentBalance = BigDecimal.valueOf(0);
-        cardNumber = generateCardNumber();
-        pinCode = generatePinCode();
+        this.currentBalance = currentBalance;
+        this.cardNumber = cardNumber;
+        this.pinCode = pinCode;
     }
 
     public int getId() {
@@ -65,7 +65,7 @@ public class User {
 
     String generatePinCode() {
         Random r = new Random();
-        String PinCode = String.valueOf(r.nextInt(1000) + 8999);
-        return PinCode;
+        String pinCode = String.valueOf(r.nextInt(1000) + 8999);
+        return pinCode;
     }
 }
