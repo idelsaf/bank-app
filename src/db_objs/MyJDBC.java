@@ -39,7 +39,7 @@ public class MyJDBC {
         return null;
     }
 
-    public static boolean register(String username, String password, String fullName, String phoneNumber) {
+    public static String register (String username, String password, String fullName, String phoneNumber) {
         try {
             if (isUsernameUnique(username)) {
                 Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
@@ -60,14 +60,16 @@ public class MyJDBC {
                 preparedStatement.setString(6, pinCode);
 
                 preparedStatement.executeUpdate();
-                return true;
+
+                return "Card number: " + cardNumber +
+                        "\nPin code: " + pinCode;
             }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        return false;
+        return null;
     }
 
     private static boolean isUsernameUnique(String username) {
@@ -92,19 +94,20 @@ public class MyJDBC {
     }
 
     private static String generateCardNumber() {
-        Random r = new Random();
+        Random random = new Random();
         String cardNum;
         do {
-            cardNum = String.valueOf(r.nextInt(10000000) + 89999999);
+            cardNum = String.valueOf(1000_0000_0000_0000L +
+                    random.nextLong(9000_0000_0000_0000L));
         } while (!isCardNumberUnique(cardNum));
 
         return cardNum;
     }
 
     private static String generatePinCode() {
-        Random r = new Random();
+        Random random = new Random();
 
-        return String.valueOf(r.nextInt(1000) + 8999);
+        return String.valueOf(1000 + random.nextInt(9000));
     }
 
     private static boolean isCardNumberUnique(String cardNum) {

@@ -1,5 +1,7 @@
 package guis;
 
+import db_objs.MyJDBC;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -66,18 +68,74 @@ public class RegisterGui extends BaseFrame {
         rePasswordField.setFont(new Font("Montserrat", Font.PLAIN, 20));
         add(rePasswordField);
 
-        JButton loginButton = new JButton("Register");
-        loginButton.setBounds(100 + 150 + 75, 370, getWidth() - 650, 30);
-        loginButton.setFont(new Font("Montserrat", Font.BOLD, 20));
-        loginButton.setBackground(Color.GRAY);
-        loginButton.setForeground(Color.WHITE);
-        add(loginButton);
-
-        JButton registerButton = new JButton("Back to Login");
-        registerButton.setBounds(100 + 150 + 75, 420, getWidth() - 650, 30);
+        JButton registerButton = new JButton("Register");
+        registerButton.setBounds(100 + 150 + 75, 370, getWidth() - 650, 30);
         registerButton.setFont(new Font("Montserrat", Font.BOLD, 20));
-        registerButton.setBackground(Color.LIGHT_GRAY);
+        registerButton.setBackground(Color.GRAY);
         registerButton.setForeground(Color.WHITE);
+        registerButton.addActionListener(e -> {
+            String username = usernameField.getText();
+            String fullName = fullNameField.getText();
+            String phoneNumber = phoneNumberField.getText();
+            String password = String.valueOf(passwordField.getPassword());
+            String rePassword = String.valueOf(rePasswordField.getPassword());
+
+            if (validateUserInput(username, fullName, phoneNumber, password, rePassword)) {
+                String details = MyJDBC.register(username, password, fullName, phoneNumber);
+                if (details != null) {
+                    RegisterGui.this.dispose();
+
+                    LoginGui loginGui = new LoginGui();
+                    loginGui.setVisible(true);
+
+                    JOptionPane.showMessageDialog(loginGui,
+                            "Registered successfully!\n" +
+                                    "Your card details:\n" +
+                                    details);
+                } else {
+                    JOptionPane.showMessageDialog(RegisterGui.this, "Error: Username is already taken.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(RegisterGui.this,
+                        """
+                                Error: Invalid input...
+                                1. All fields must be filled up.
+                                2. Username must be at least 6 characters.
+                                3. Password must match.
+                                4. Make sure you have entered personal information correctly.""");
+            }
+        });
         add(registerButton);
+
+        JButton loginButton = new JButton("Back to Login");
+        loginButton.setBounds(100 + 150 + 75, 420, getWidth() - 650, 30);
+        loginButton.setFont(new Font("Montserrat", Font.BOLD, 20));
+        loginButton.setBackground(Color.LIGHT_GRAY);
+        loginButton.setForeground(Color.WHITE);
+        loginButton.addActionListener(e -> {
+            RegisterGui.this.dispose();
+            new LoginGui().setVisible(true);
+        });
+        add(loginButton);
+    }
+
+    private boolean validateUserInput(String username, String fullName, String phoneNumber, String password, String rePassword) {
+        if (username.isEmpty() || fullName.isEmpty() || phoneNumber.isEmpty() || password.isEmpty() || rePassword.isEmpty()) {
+            return false;
+        }
+
+        if (username.length() < 6)
+            return false;
+
+        if (!password.equals(rePassword))
+            return false;
+
+        if (!fullName.matches("[a-zA-Z ]+"))
+            return false;
+
+        if (!phoneNumber.matches("[0-9]+") || phoneNumber.length() != 11)
+            return false;
+
+        return true;
     }
 }
