@@ -2,7 +2,6 @@ package db_objs;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Random;
 
 public class User {
     private final int id;
@@ -55,17 +54,5 @@ public class User {
 
     public void setCurrentBalance(BigDecimal newBalance) {
         currentBalance = newBalance.setScale(2, RoundingMode.FLOOR);
-    }
-
-    String generateCardNumber() {
-        Random r = new Random();
-        String cardNum = String.valueOf(r.nextInt(10000000) + 89999999);
-        return cardNum;
-    }
-
-    String generatePinCode() {
-        Random r = new Random();
-        String pinCode = String.valueOf(r.nextInt(1000) + 8999);
-        return pinCode;
     }
 }
