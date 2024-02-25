@@ -20,7 +20,7 @@ public class RegisterGui extends BaseFrame {
 
         JLabel usernameLabel = new JLabel("Username:");
         usernameLabel.setBounds(100, 100, 150, 24);
-        usernameLabel.setFont(new Font("Montserrat", Font.PLAIN,20));
+        usernameLabel.setFont(new Font("Montserrat", Font.PLAIN, 20));
         add(usernameLabel);
 
         JTextField usernameField = new JTextField();
@@ -30,7 +30,7 @@ public class RegisterGui extends BaseFrame {
 
         JLabel fullNameLabel = new JLabel("Full name:");
         fullNameLabel.setBounds(100, 150, 150, 24);
-        fullNameLabel.setFont(new Font("Montserrat", Font.PLAIN,20));
+        fullNameLabel.setFont(new Font("Montserrat", Font.PLAIN, 20));
         add(fullNameLabel);
 
         JTextField fullNameField = new JTextField();
@@ -40,7 +40,7 @@ public class RegisterGui extends BaseFrame {
 
         JLabel phoneNumberLabel = new JLabel("Phone number:");
         phoneNumberLabel.setBounds(100, 200, 230, 24);
-        phoneNumberLabel.setFont(new Font("Montserrat", Font.PLAIN,20));
+        phoneNumberLabel.setFont(new Font("Montserrat", Font.PLAIN, 20));
         add(phoneNumberLabel);
 
         JTextField phoneNumberField = new JTextField();
@@ -50,7 +50,7 @@ public class RegisterGui extends BaseFrame {
 
         JLabel passwordLabel = new JLabel("Password:");
         passwordLabel.setBounds(100, 250, 150, 24);
-        passwordLabel.setFont(new Font("Montserrat", Font.PLAIN,20));
+        passwordLabel.setFont(new Font("Montserrat", Font.PLAIN, 20));
         add(passwordLabel);
 
         JPasswordField passwordField = new JPasswordField();
@@ -60,7 +60,7 @@ public class RegisterGui extends BaseFrame {
 
         JLabel rePasswordLabel = new JLabel("Re-password:");
         rePasswordLabel.setBounds(100, 300, 150, 24);
-        rePasswordLabel.setFont(new Font("Montserrat", Font.PLAIN,20));
+        rePasswordLabel.setFont(new Font("Montserrat", Font.PLAIN, 20));
         add(rePasswordLabel);
 
         JPasswordField rePasswordField = new JPasswordField();

@@ -39,7 +39,7 @@ public class MyJDBC {
         return null;
     }
 
-    public static String register (String username, String password, String fullName, String phoneNumber) {
+    public static String register(String username, String password, String fullName, String phoneNumber) {
         try {
             if (isUsernameUnique(username)) {
                 Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);

@@ -6,7 +6,7 @@ import db_objs.User;
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginGui extends BaseFrame{
+public class LoginGui extends BaseFrame {
     public LoginGui() {
         super("Bank App Login");
     }
@@ -21,7 +21,7 @@ public class LoginGui extends BaseFrame{
 
         JLabel usernameLabel = new JLabel("Username:");
         usernameLabel.setBounds(120, 140, 150, 24);
-        usernameLabel.setFont(new Font("Montserrat", Font.PLAIN,20));
+        usernameLabel.setFont(new Font("Montserrat", Font.PLAIN, 20));
         add(usernameLabel);
 
         JTextField usernameField = new JTextField();
@@ -31,7 +31,7 @@ public class LoginGui extends BaseFrame{
 
         JLabel passwordLabel = new JLabel("Password:");
         passwordLabel.setBounds(120, 200, 150, 24);
-        passwordLabel.setFont(new Font("Montserrat", Font.PLAIN,20));
+        passwordLabel.setFont(new Font("Montserrat", Font.PLAIN, 20));
         add(passwordLabel);
 
         JPasswordField passwordField = new JPasswordField();

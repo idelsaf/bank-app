@@ -7,9 +7,11 @@ import java.awt.*;
 
 public class BankAppGui extends BaseFrame {
     private JTextField balanceField;
+
     public JTextField getBalanceField() {
         return balanceField;
     }
+
     public BankAppGui(User user) {
         super("Bank App", user);
     }

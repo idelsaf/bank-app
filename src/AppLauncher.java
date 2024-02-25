@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class AppLauncher {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-                new LoginGui().setVisible(true);
+            new LoginGui().setVisible(true);
 //                new RegisterGui().setVisible(true);
 //            new BankAppGui(
 //                    new User(1,
