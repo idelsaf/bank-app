@@ -6,7 +6,7 @@ A simple bank system application with a graphic user interface developed in Java
 
 - Account:
   - login to existing account;
-  - _logout of the account;_
+  - logout of the account;
   - register a new account & get card details;
 - Bank system:
   - _check balance;_

@@ -4,8 +4,10 @@ import db_objs.User;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class BankAppGui extends BaseFrame {
+public class BankAppGui extends BaseFrame implements ActionListener {
     private JTextField balanceField;
 
     public JTextField getBalanceField() {
@@ -46,6 +48,7 @@ public class BankAppGui extends BaseFrame {
         depositButton.setFont(new Font("Montserrat", Font.BOLD, 20));
         depositButton.setHorizontalAlignment(SwingConstants.CENTER);
         depositButton.setBackground(Color.LIGHT_GRAY);
+        depositButton.addActionListener(this);
         add(depositButton);
 
         JButton withdrawButton = new JButton("Withdraw");
@@ -53,6 +56,7 @@ public class BankAppGui extends BaseFrame {
         withdrawButton.setFont(new Font("Montserrat", Font.BOLD, 20));
         withdrawButton.setHorizontalAlignment(SwingConstants.CENTER);
         withdrawButton.setBackground(Color.LIGHT_GRAY);
+        withdrawButton.addActionListener(this);
         add(withdrawButton);
 
         JButton transferButton = new JButton("Transfer");
@@ -60,6 +64,7 @@ public class BankAppGui extends BaseFrame {
         transferButton.setFont(new Font("Montserrat", Font.BOLD, 20));
         transferButton.setHorizontalAlignment(SwingConstants.CENTER);
         transferButton.setBackground(Color.LIGHT_GRAY);
+        transferButton.addActionListener(this);
         add(transferButton);
 
         JButton transactionsButton = new JButton("All transactions");
@@ -67,6 +72,7 @@ public class BankAppGui extends BaseFrame {
         transactionsButton.setFont(new Font("Montserrat", Font.BOLD, 20));
         transactionsButton.setHorizontalAlignment(SwingConstants.CENTER);
         transactionsButton.setBackground(Color.LIGHT_GRAY);
+        transactionsButton.addActionListener(this);
         add(transactionsButton);
 
         JButton cardDetailsButton = new JButton("Card Details");
@@ -74,6 +80,7 @@ public class BankAppGui extends BaseFrame {
         cardDetailsButton.setFont(new Font("Montserrat", Font.BOLD, 20));
         cardDetailsButton.setHorizontalAlignment(SwingConstants.CENTER);
         cardDetailsButton.setBackground(Color.LIGHT_GRAY);
+        cardDetailsButton.addActionListener(this);
         add(cardDetailsButton);
 
         JButton logoutButton = new JButton("Logout");
@@ -82,6 +89,18 @@ public class BankAppGui extends BaseFrame {
         logoutButton.setHorizontalAlignment(SwingConstants.CENTER);
         logoutButton.setBackground(new Color(255, 89, 64));
         logoutButton.setForeground(Color.WHITE);
+        logoutButton.addActionListener(this);
         add(logoutButton);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String buttonPressed = e.getActionCommand();
+
+        if (buttonPressed.equalsIgnoreCase("Logout")) {
+            new LoginGui().setVisible(true);
+
+            this.dispose();
+        }
     }
 }

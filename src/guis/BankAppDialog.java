@@ -9,7 +9,7 @@ public class BankAppDialog extends JDialog {
     private BankAppGui bankAppGui;
 
     public BankAppDialog(BankAppGui bankAppGui, User user) {
-        setSize(450, 450);
+        setSize(450, 420);
         setModal(true); // add focus to the dialog
         setLocationRelativeTo(bankAppGui);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
