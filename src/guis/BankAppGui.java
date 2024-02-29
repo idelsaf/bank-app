@@ -101,6 +101,24 @@ public class BankAppGui extends BaseFrame implements ActionListener {
             new LoginGui().setVisible(true);
 
             this.dispose();
+            return;
+        }
+
+        BankAppDialog bankAppDialog = new BankAppDialog(this, user);
+
+        bankAppDialog.setTitle(buttonPressed);
+
+        if (buttonPressed.equalsIgnoreCase("Deposit") || buttonPressed.equalsIgnoreCase("Withdraw")
+                || buttonPressed.equalsIgnoreCase("Transfer")) {
+            bankAppDialog.addCurrentBalanceAndAmount();
+
+            bankAppDialog.addActionButton(buttonPressed);
+
+            if (buttonPressed.equalsIgnoreCase("Transfer")) {
+                bankAppDialog.addUserField();
+            }
+
+            bankAppDialog.setVisible(true);
         }
     }
 }
