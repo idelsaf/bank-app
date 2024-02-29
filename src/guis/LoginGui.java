@@ -53,8 +53,6 @@ public class LoginGui extends BaseFrame {
                 LoginGui.this.dispose();
                 BankAppGui bankAppGui = new BankAppGui(user);
                 bankAppGui.setVisible(true);
-
-                JOptionPane.showMessageDialog(bankAppGui, "Login successfully!");
             } else {
                 JOptionPane.showMessageDialog(LoginGui.this, "Login failed...");
             }
