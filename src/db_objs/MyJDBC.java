@@ -12,9 +12,7 @@ public class MyJDBC {
     public static User validateLogin(String username, String password) {
         try {
             Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM users WHERE username = ? AND password = ?"
-            );
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
 
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
@@ -45,8 +43,8 @@ public class MyJDBC {
                 Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
 
                 PreparedStatement preparedStatement = connection.prepareStatement(
-                        "INSERT INTO  users(username, password, full_name, phone_number, card_number, pin_code)" +
-                                "VALUES(?, ?, ?, ?, ?, ?)"
+                        "INSERT INTO  users(username, password, full_name, phone_number, card_number, pin_code)"
+                                + "VALUES(?, ?, ?, ?, ?, ?)"
                 );
 
                 String cardNumber = generateCardNumber();
@@ -61,8 +59,7 @@ public class MyJDBC {
 
                 preparedStatement.executeUpdate();
 
-                return "Card number: " + cardNumber +
-                        "\nPin code: " + pinCode;
+                return "Card number: " + cardNumber + "\nPin code: " + pinCode;
             }
 
         } catch (SQLException e) {
@@ -76,9 +73,7 @@ public class MyJDBC {
         try {
             Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
 
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM users WHERE username = ?"
-            );
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE username = ?");
 
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -97,8 +92,7 @@ public class MyJDBC {
         Random random = new Random();
         String cardNum;
         do {
-            cardNum = String.valueOf(1000_0000_0000_0000L +
-                    random.nextLong(9000_0000_0000_0000L));
+            cardNum = String.valueOf(1000_0000_0000_0000L + random.nextLong(9000_0000_0000_0000L));
         } while (!isCardNumberUnique(cardNum));
 
         return cardNum;
@@ -114,9 +108,7 @@ public class MyJDBC {
         try {
             Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
 
-            PreparedStatement preparedStatement = connection.prepareStatement(
-                    "SELECT * FROM users WHERE card_number = ?"
-            );
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM users WHERE card_number = ?");
 
             preparedStatement.setString(1, cardNum);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -131,5 +123,45 @@ public class MyJDBC {
         return false;
     }
 
+    public static boolean addTransactionToDB(Transaction transaction) {
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+            PreparedStatement insertTransaction = connection.prepareStatement(
+                    "INSERT transactions(user_id, transaction_type, transaction_date, transaction_amount)" +
+                            "VALUES(?, ?, NOW(), ?)"
+            );
 
+            insertTransaction.setInt(1, transaction.getUserId());
+            insertTransaction.setString(2, transaction.getTransactionType());
+            insertTransaction.setBigDecimal(3, transaction.getTransactionAmount());
+
+            insertTransaction.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public static boolean updateBalance(User user) {
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+
+            PreparedStatement updateBalance = connection.prepareStatement(
+                    "UPDATE users SET current_balance = ? WHERE id = ?"
+            );
+
+            updateBalance.setBigDecimal(1, user.getCurrentBalance());
+            updateBalance.setInt(2, user.getId());
+
+            updateBalance.executeUpdate();
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }
