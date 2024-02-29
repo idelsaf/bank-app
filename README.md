@@ -9,8 +9,8 @@ A simple bank system application with a graphic user interface developed in Java
   - logout of the account;
   - register a new account & get card details;
 - Bank system:
-  - _check balance;_
-  - _deposit funds;_
+  - check balance;
+  - deposit funds;
   - _withdraw funds;_
   - _transfer funds to other user;_
   - _view transaction history;_
@@ -18,7 +18,8 @@ A simple bank system application with a graphic user interface developed in Java
 
 ### TODO:
 
-- all features written in italics
+- all features written in italics;
+- number check in fields (deposit, withdraw, transfer);
 
 ### Technologies:
 
