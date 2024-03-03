@@ -11,8 +11,8 @@ A simple bank system application with a graphic user interface developed in Java
 - Bank system:
   - check balance;
   - deposit funds;
-  - _withdraw funds;_
-  - _transfer funds to other user;_
+  - withdraw funds;
+  - transfer funds to other user;
   - _view transaction history;_
   - _view card details;_
 
