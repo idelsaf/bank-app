@@ -164,4 +164,56 @@ public class MyJDBC {
 
         return false;
     }
+
+    public static boolean transfer(User user, String receiverUsername, double transferAmount) {
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+
+            PreparedStatement queryUser = connection.prepareStatement(
+                    "SELECT * FROM users WHERE username = ?"
+            );
+
+            queryUser.setString(1, receiverUsername);
+            ResultSet resultSet = queryUser.executeQuery();
+
+            while (resultSet.next()) {
+                User receiverUser = new User(
+                        resultSet.getInt("id"),
+                        receiverUsername,
+                        resultSet.getString("password"),
+                        resultSet.getString("full_name"),
+                        resultSet.getString("phone_number"),
+                        resultSet.getBigDecimal("current_balance"),
+                        resultSet.getString("card_number"),
+                        resultSet.getString("pin_code")
+                );
+
+                Transaction transferTransaction = new Transaction(
+                        user.getId(),
+                        "Transfer",
+                        null,
+                        new BigDecimal(transferAmount)
+                );
+
+                Transaction receivedTransaction = new Transaction(
+                        receiverUser.getId(),
+                        "Transfer",
+                        null,
+                        new BigDecimal(transferAmount)
+                );
+
+                receiverUser.setCurrentBalance(receiverUser.getCurrentBalance().add(BigDecimal.valueOf(transferAmount)));
+                updateBalance(receiverUser);
+
+                addTransactionToDB(transferTransaction);
+                addTransactionToDB(receivedTransaction);
+
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

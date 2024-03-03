@@ -107,6 +107,10 @@ public class BankAppDialog extends JDialog implements ActionListener {
         bankAppGui.getBalanceField().setText(user.getCurrentBalance() + " RUB");
     }
 
+    private void handleTransfer (User user, String receiverUser, double amount) {
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String buttonPressed = e.getActionCommand();
@@ -115,6 +119,18 @@ public class BankAppDialog extends JDialog implements ActionListener {
 
         if (buttonPressed.equalsIgnoreCase("Deposit")) {
             handleTransaction(buttonPressed, amountValue);
+        } else {
+            int result = user.getCurrentBalance().compareTo(BigDecimal.valueOf(amountValue));
+            if (result < 0) {
+                JOptionPane.showMessageDialog(this, "Error: Insufficient funds on the card...");
+                return;
+            }
+
+            if (buttonPressed.equalsIgnoreCase("Withdraw")) {
+                handleTransaction(buttonPressed, amountValue);
+            } else {
+                String receiverUser = enterUserField.getText();
+            }
         }
     }
 }
