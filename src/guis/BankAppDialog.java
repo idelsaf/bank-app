@@ -93,7 +93,6 @@ public class BankAppDialog extends JDialog implements ActionListener {
         } else {
             JOptionPane.showMessageDialog(this, transactionType + " failed...");
         }
-
     }
 
     private void resetFieldsAndUpdateBalance() {
@@ -107,8 +106,13 @@ public class BankAppDialog extends JDialog implements ActionListener {
         bankAppGui.getBalanceField().setText(user.getCurrentBalance() + " RUB");
     }
 
-    private void handleTransfer (User user, String receiverUser, double amount) {
-
+    private void handleTransfer(User user, String receiverUser, double amount) {
+        if (MyJDBC.transfer(user, receiverUser, amount)) {
+            JOptionPane.showMessageDialog(this, "Transfer successfully!");
+            resetFieldsAndUpdateBalance();
+        } else {
+            JOptionPane.showMessageDialog(this, "Transfer failed...");
+        }
     }
 
     @Override
@@ -130,6 +134,8 @@ public class BankAppDialog extends JDialog implements ActionListener {
                 handleTransaction(buttonPressed, amountValue);
             } else {
                 String receiverUser = enterUserField.getText();
+
+                handleTransfer(user, receiverUser, amountValue);
             }
         }
     }

@@ -136,6 +136,7 @@ public class MyJDBC {
             insertTransaction.setBigDecimal(3, transaction.getTransactionAmount());
 
             insertTransaction.executeUpdate();
+
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -204,6 +205,9 @@ public class MyJDBC {
 
                 receiverUser.setCurrentBalance(receiverUser.getCurrentBalance().add(BigDecimal.valueOf(transferAmount)));
                 updateBalance(receiverUser);
+
+                user.setCurrentBalance(user.getCurrentBalance().subtract(BigDecimal.valueOf(transferAmount)));
+                updateBalance(user);
 
                 addTransactionToDB(transferTransaction);
                 addTransactionToDB(receivedTransaction);
