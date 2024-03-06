@@ -13,7 +13,7 @@ A simple bank system application with a graphic user interface developed in Java
   - deposit funds;
   - withdraw funds;
   - transfer funds to other user;
-  - _view transaction history;_
+  - view transaction history;
   - _view card details;_
 
 ### TODO:

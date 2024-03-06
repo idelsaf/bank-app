@@ -2,6 +2,7 @@ package db_objs;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MyJDBC {
@@ -139,10 +140,8 @@ public class MyJDBC {
 
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-
-        return false;
     }
 
     public static boolean updateBalance(User user) {
@@ -160,10 +159,8 @@ public class MyJDBC {
 
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-
-        return false;
     }
 
     public static boolean transfer(User user, String receiverUsername, double transferAmount) {
@@ -215,9 +212,41 @@ public class MyJDBC {
                 return true;
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
         return false;
+    }
+
+    public static ArrayList<Transaction> getAllTransactions(User user) {
+        ArrayList<Transaction> allTransactions = new ArrayList<>();
+
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
+
+            PreparedStatement selectAllTransactions = connection.prepareStatement(
+                    "SELECT * FROM transactions WHERE user_id = ?"
+            );
+
+            selectAllTransactions.setInt(1, user.getId());
+
+            ResultSet resultSet = selectAllTransactions.executeQuery();
+
+            while (resultSet.next()) {
+                Transaction transaction = new Transaction(
+                        user.getId(),
+                        resultSet.getString("transaction_type"),
+                        resultSet.getDate("transaction_date"),
+                        resultSet.getBigDecimal("transaction_amount")
+                );
+
+                allTransactions.add(transaction);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return allTransactions;
     }
 }

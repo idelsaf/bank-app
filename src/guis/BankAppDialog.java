@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class BankAppDialog extends JDialog implements ActionListener {
     private User user;
@@ -16,6 +17,8 @@ public class BankAppDialog extends JDialog implements ActionListener {
     private JLabel balanceLabel, enterAmountLabel, enterUserLabel;
     private JTextField enterAmountField, enterUserField;
     private JButton actionButton;
+    private JPanel allTransactionsPanel;
+    private ArrayList<Transaction> allTransactions;
 
     public BankAppDialog(BankAppGui bankAppGui, User user) {
         setSize(450, 420);
@@ -73,6 +76,45 @@ public class BankAppDialog extends JDialog implements ActionListener {
 
     }
 
+    public void addAllTransactionsComponents() {
+        allTransactionsPanel = new JPanel();
+        allTransactionsPanel.setLayout(new BoxLayout(allTransactionsPanel, BoxLayout.Y_AXIS));
+
+        JScrollPane scrollPane = new JScrollPane(allTransactionsPanel);
+
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setBounds(10, 20, getWidth() - 20, getHeight() - 20);
+
+        allTransactions = MyJDBC.getAllTransactions(user);
+
+        for (int i = 0; i < allTransactions.size(); i++) {
+            Transaction transaction = allTransactions.get(i);
+
+            JPanel allTransactionsContainer = new JPanel();
+            allTransactionsContainer.setLayout(new BorderLayout());
+
+            JLabel transactionTypeLabel = new JLabel(transaction.getTransactionType());
+            transactionTypeLabel.setFont(new Font("Montserrat", Font.BOLD, 18));
+
+            JLabel transactionDateLabel = new JLabel(String.valueOf(transaction.getTransactionDate()));
+            transactionDateLabel.setFont(new Font("Montserrat", Font.PLAIN, 16));
+
+            JLabel transactionAmountLabel = new JLabel(String.valueOf(transaction.getTransactionAmount() + " RUB"));
+            transactionAmountLabel.setFont(new Font("Montserrat", Font.BOLD, 18));
+
+            allTransactionsContainer.add(transactionTypeLabel, BorderLayout.WEST);
+            allTransactionsContainer.add(transactionDateLabel, BorderLayout.SOUTH);
+            allTransactionsContainer.add(transactionAmountLabel, BorderLayout.EAST);
+
+            allTransactionsContainer.setBackground(Color.WHITE);
+            allTransactionsContainer.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+
+            allTransactionsPanel.add(allTransactionsContainer);
+        }
+
+        add(scrollPane);
+    }
+
     private void handleTransaction(String transactionType, double amountValue) {
         Transaction transaction;
 
@@ -83,7 +125,7 @@ public class BankAppDialog extends JDialog implements ActionListener {
         } else {
             user.setCurrentBalance(user.getCurrentBalance().subtract(new BigDecimal(amountValue)));
 
-            transaction = new Transaction(user.getId(), transactionType, null, new BigDecimal(-amountValue));
+            transaction = new Transaction(user.getId(), transactionType, null, BigDecimal.valueOf(-amountValue));
         }
 
         if (MyJDBC.addTransactionToDB(transaction) && MyJDBC.updateBalance(user)) {

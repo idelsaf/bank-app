@@ -118,7 +118,10 @@ public class BankAppGui extends BaseFrame implements ActionListener {
                 bankAppDialog.addUserField();
             }
 
-            bankAppDialog.setVisible(true);
+        } else if (buttonPressed.equalsIgnoreCase("All transactions")) {
+            bankAppDialog.addAllTransactionsComponents();
         }
+
+        bankAppDialog.setVisible(true);
     }
 }
