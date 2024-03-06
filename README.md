@@ -14,7 +14,7 @@ A simple bank system application with a graphic user interface developed in Java
   - withdraw funds;
   - transfer funds to other user;
   - view transaction history;
-  - _view card details;_
+  - view card details;
 
 ### TODO:
 
