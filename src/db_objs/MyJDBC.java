@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+
 public class MyJDBC {
     private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/bank-app";
     private static final String DB_USERNAME = "";
@@ -190,7 +191,7 @@ public class MyJDBC {
                         user.getId(),
                         "Transfer",
                         null,
-                        new BigDecimal(transferAmount)
+                        BigDecimal.valueOf(-transferAmount)
                 );
 
                 Transaction receivedTransaction = new Transaction(

@@ -99,7 +99,13 @@ public class BankAppDialog extends JDialog implements ActionListener {
             JLabel transactionDateLabel = new JLabel(String.valueOf(transaction.getTransactionDate()));
             transactionDateLabel.setFont(new Font("Montserrat", Font.PLAIN, 16));
 
-            JLabel transactionAmountLabel = new JLabel(String.valueOf(transaction.getTransactionAmount() + " RUB"));
+            String transactionAmount = String.valueOf(transaction.getTransactionAmount());
+            String signOfAmount = "";
+
+            if (!(transactionAmount.charAt(0) == '-'))
+                signOfAmount = "+";
+
+            JLabel transactionAmountLabel = new JLabel( signOfAmount + transactionAmount + " RUB");
             transactionAmountLabel.setFont(new Font("Montserrat", Font.BOLD, 18));
 
             allTransactionsContainer.add(transactionTypeLabel, BorderLayout.WEST);
