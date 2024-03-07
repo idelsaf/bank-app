@@ -16,11 +16,6 @@ A simple bank system application with a graphic user interface developed in Java
   - view transaction history;
   - view card details;
 
-### TODO:
-
-- all features written in italics;
-- number check in fields (deposit, withdraw, transfer);
-
 ### Technologies:
 
 - JDK 21

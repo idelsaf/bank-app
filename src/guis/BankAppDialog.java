@@ -117,37 +117,37 @@ public class BankAppDialog extends JDialog implements ActionListener {
 
     public void addCardDetails() {
         JLabel cardNumberLabel = new JLabel("Card number:");
-        cardNumberLabel.setBounds(0, 50+50, getWidth(), 20);
+        cardNumberLabel.setBounds(0, 50 + 50, getWidth(), 20);
         cardNumberLabel.setFont(new Font("Montserrat", Font.BOLD, 20));
         cardNumberLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(cardNumberLabel);
 
         JLabel cardNumber = new JLabel(user.getCardNumber());
-        cardNumber.setBounds(0, 70+50, getWidth(), 20);
+        cardNumber.setBounds(0, 70 + 50, getWidth(), 20);
         cardNumber.setFont(new Font("Montserrat", Font.PLAIN, 18));
         cardNumber.setHorizontalAlignment(SwingConstants.CENTER);
         add(cardNumber);
 
         JLabel pinCodeLabel = new JLabel("Pin code: ");
-        pinCodeLabel.setBounds(0, 100+50, getWidth(), 20);
+        pinCodeLabel.setBounds(0, 100 + 50, getWidth(), 20);
         pinCodeLabel.setFont(new Font("Montserrat", Font.BOLD, 20));
         pinCodeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(pinCodeLabel);
 
         JLabel pinCode = new JLabel(user.getPinCode());
-        pinCode.setBounds(0, 120+50, getWidth(), 20);
+        pinCode.setBounds(0, 120 + 50, getWidth(), 20);
         pinCode.setFont(new Font("Montserrat", Font.PLAIN, 18));
         pinCode.setHorizontalAlignment(SwingConstants.CENTER);
         add(pinCode);
 
         JLabel fullName = new JLabel("Cardholder: " + user.getFullName());
-        fullName.setBounds(0, 160+50, getWidth(), 20);
+        fullName.setBounds(0, 160 + 50, getWidth(), 20);
         fullName.setFont(new Font("Montserrat", Font.BOLD, 18));
         fullName.setHorizontalAlignment(SwingConstants.CENTER);
         add(fullName);
 
         JLabel phoneNumber = new JLabel("Phone number: " + user.getPhoneNumber());
-        phoneNumber.setBounds(0, 180+50, getWidth(), 20);
+        phoneNumber.setBounds(0, 180 + 50, getWidth(), 20);
         phoneNumber.setFont(new Font("Montserrat", Font.BOLD, 18));
         phoneNumber.setHorizontalAlignment(SwingConstants.CENTER);
         add(phoneNumber);
@@ -198,6 +198,12 @@ public class BankAppDialog extends JDialog implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String buttonPressed = e.getActionCommand();
+
+        if (!enterAmountField.getText().matches("[0-9]+") || enterAmountField.getText().length() > 8) {
+            JOptionPane.showMessageDialog(this, "Error: incorrect input...");
+
+            return;
+        }
 
         double amountValue = Double.parseDouble(enterAmountField.getText());
 
