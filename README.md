@@ -21,3 +21,9 @@ A simple bank system application with a graphic user interface developed in Java
 - JDK 21
 - Swing framework
 - MySQL database
+
+### Screenshots:
+
+![login page](screenshots/login.jpg)
+![registration page](screenshots/register.jpg)
+![main page](screenshots/main.jpg)
